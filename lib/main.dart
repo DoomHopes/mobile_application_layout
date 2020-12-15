@@ -35,7 +35,7 @@ class PersonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Япония'),
+        title: Text('Котик'),
       ),
       body: Container(
         child: _buildMainColumn(),
@@ -53,14 +53,14 @@ class PersonWidget extends StatelessWidget {
                 children: <Widget>[
                   Container(
                     margin: const EdgeInsets.all(5),
-                    child: Text('Рейтинг'),
+                    child: _buildRating(),
                   ),
                   Card(
                     margin: const EdgeInsets.all(5),
                     elevation: 5,
                     child: Container(
                       padding: const EdgeInsets.all(10),
-                      child: Text('Кнопочки'),
+                      child: _buildAction(),
                     ),
                   ),
                   Container(
@@ -78,7 +78,49 @@ class PersonWidget extends StatelessWidget {
         child: Card(
           elevation: 5,
           margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
-          child: Image.asset(name),
+          child: Image.asset(
+            //'assets/images/Orix.png',
+            'assets/images/photo_2020-12-09_03-42-59.jpg',
+            fit: BoxFit.cover,
+          ),
         ),
+      );
+
+  Widget _buildRating() => ListTile(
+        title: Text(
+          'Котик',
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        subtitle: Text('Красивый котик'),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            FavoriteWidget(),
+          ],
+        ),
+      );
+
+  Widget _buildAction() => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          _buildButton('Серый', Icons.star, Colors.grey),
+          _buildButton('Рыжий', Icons.star, Colors.orange),
+          _buildButton('Коричневый', Icons.star, Colors.brown),
+        ],
+      );
+
+  Widget _buildButton(String label, IconData icon, Color color) => Column(
+        children: <Widget>[
+          Icon(
+            icon,
+            color: Colors.black,
+          ),
+          Container(
+            child: Text(
+              label,
+              style: TextStyle(fontWeight: FontWeight.w400, color: color),
+            ),
+          )
+        ],
       );
 }
