@@ -7,9 +7,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sample app',
-      theme: ThemeData(
-        primarySwatch: Colors.greenAccent[100],
-      ),
+      theme: ThemeData(primaryColor: Colors.purple),
+      home: PersonWidget(),
     );
   }
 }
@@ -46,7 +45,7 @@ class PersonWidget extends StatelessWidget {
 
   Widget _buildMainColumn() => ListView(
         children: [
-          //_buildTopImage(),
+          _buildTopImage(),
           Center(
             child: Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
@@ -73,5 +72,13 @@ class PersonWidget extends StatelessWidget {
             ),
           )
         ],
+      );
+
+  Widget _buildTopImage() => Container(
+        child: Card(
+          elevation: 5,
+          margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          child: Image.asset(name),
+        ),
       );
 }
