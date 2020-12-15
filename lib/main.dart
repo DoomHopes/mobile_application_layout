@@ -24,9 +24,37 @@ class _FavoriteWidgetState extends State<FavoriteWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text('Some Text'),
+    return Row(
+      children: <Widget>[
+        Container(
+          child: IconButton(
+            icon: (_isFavorited
+                ? Icon(Icons.favorite)
+                : Icon(Icons.favorite_border)),
+            onPressed: _togglFavorite,
+            color: Colors.red[500],
+          ),
+        ),
+        SizedBox(
+          width: 40,
+          child: Container(
+            child: Text('$_favoriteCount'),
+          ),
+        )
+      ],
     );
+  }
+
+  void _togglFavorite() {
+    setState(() {
+      if (_isFavorited) {
+        _isFavorited = false;
+        _favoriteCount -= 1;
+      } else {
+        _isFavorited = true;
+        _favoriteCount += 1;
+      }
+    });
   }
 }
 
@@ -35,7 +63,7 @@ class PersonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Котик'),
+        title: Text('Заключенный номер 123'),
       ),
       body: Container(
         child: _buildMainColumn(),
@@ -65,7 +93,7 @@ class PersonWidget extends StatelessWidget {
                   ),
                   Container(
                     margin: const EdgeInsets.all(5),
-                    child: Text('Описание'),
+                    child: _buildDescription(),
                   )
                 ],
               ),
@@ -77,10 +105,9 @@ class PersonWidget extends StatelessWidget {
   Widget _buildTopImage() => Container(
         child: Card(
           elevation: 5,
-          margin: const EdgeInsets.only(left: 20, right: 20, top: 20),
+          margin: const EdgeInsets.only(left: 50, right: 50, top: 50),
           child: Image.asset(
-            //'assets/images/Orix.png',
-            'assets/images/photo_2020-12-09_03-42-59.jpg',
+            'assets/images/photo_2020-12-03_11-21-16.jpg',
             fit: BoxFit.cover,
           ),
         ),
@@ -91,7 +118,7 @@ class PersonWidget extends StatelessWidget {
           'Котик',
           style: TextStyle(fontWeight: FontWeight.w500),
         ),
-        subtitle: Text('Красивый котик'),
+        subtitle: Text('Опасный Преступник'),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
@@ -103,9 +130,9 @@ class PersonWidget extends StatelessWidget {
   Widget _buildAction() => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          _buildButton('Серый', Icons.star, Colors.grey),
-          _buildButton('Рыжий', Icons.star, Colors.orange),
-          _buildButton('Коричневый', Icons.star, Colors.brown),
+          _buildButton('Вор', Icons.star, Colors.grey),
+          _buildButton('Преступник', Icons.star, Colors.orange),
+          _buildButton('Рецидивист', Icons.star, Colors.brown),
         ],
       );
 
@@ -122,5 +149,12 @@ class PersonWidget extends StatelessWidget {
             ),
           )
         ],
+      );
+  Widget _buildDescription() => Text(
+        'Оклевитал собаку при поиске колбасы. Не двал спать по ночам. Гонял на приоре. Приговорен к двум неделям общественных работ ',
+        softWrap: true,
+        style: TextStyle(
+          fontSize: 18.0,
+        ),
       );
 }
